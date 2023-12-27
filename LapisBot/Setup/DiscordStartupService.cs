@@ -70,6 +70,16 @@ public class DiscordStartupService : IHostedService
             return;
         }
 
+        if (!user.IsBot)
+        {
+            var dmChannel = await user.CreateDMChannelAsync();
+            var embed = new EmbedBuilder()
+           .WithTitle($"Welcome {user.Username} to {channel.Guild.Name} EPICO")
+           .WithImageUrl("https://cdn.discordapp.com/attachments/812190063924084748/1189624147291164702/download_1.gif")
+           .WithColor(new Color(255, 136, 0));
+            await dmChannel.SendMessageAsync(embed: embed.Build());
+        }
+
         using var ms = new MemoryStream(result.Item1);
         var img = new Image(ms);
         await channel.SendFileAsync(img.Stream, $"LapisCanvasWelcome{Guid.NewGuid()}.{result.Item2}");

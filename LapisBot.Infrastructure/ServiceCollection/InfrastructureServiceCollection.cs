@@ -15,6 +15,5 @@ public static class InfrastructureServiceCollection
         services.AddSingleton<IWelcomeRepository, WelcomeRepository>();
         services.AddSingleton<IProfileRepository, ProfileRepository>();
         services.AddSingleton<IAnimeRepository, AnimeRepository>();
-
     }
 }

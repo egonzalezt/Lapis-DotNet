@@ -5,7 +5,7 @@ namespace LapisBot.Infrastructure.ServiceCollection;
 
 internal static class HttpServiceCollection
 {
-    public static void AddHttpClientsConfiguration(this IServiceCollection services)
+    internal static void AddHttpClientsConfiguration(this IServiceCollection services)
     {
         services.AddHttpClient();
         services.AddHttpClient(nameof(MiscRepository), client =>

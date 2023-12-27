@@ -3,13 +3,14 @@
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using System.Linq;
 
 [DefaultMemberPermissions(GuildPermission.ManageChannels)]
 public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("enable-channel", "Enable a specific channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
-    public async Task EnableChannel(SocketGuildChannel channel, IRole role = null)
+    public async Task EnableChannel(SocketGuildChannel channel, IRole? role = null)
     {
         if (channel != null)
         {
@@ -26,7 +27,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
 
     [SlashCommand("disable-channel", "Disable a specific channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
-    public async Task DisableChannel(SocketGuildChannel channel, IRole role = null)
+    public async Task DisableChannel(SocketGuildChannel channel, IRole? role = null)
     {
         if (channel != null)
         {
@@ -133,5 +134,44 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         {
             await RespondAsync("Only text channels can have slow mode enabled.", ephemeral: true);
         }
+    }
+
+    [SlashCommand("delete-messages", "Deletes the specified amount of messages.")]
+    [RequireUserPermission(GuildPermission.Administrator)]
+    [RequireBotPermission(ChannelPermission.ManageMessages)]
+    public async Task DeleteMessages(int amount)
+    {
+        const int maximunDeletePerRequest = 20;
+        if (amount <= 0)
+        {
+            await RespondAsync("Please specify a positive number of messages to delete.", ephemeral: true);
+            return;
+        }
+
+        if (amount > maximunDeletePerRequest)
+        {
+            await RespondAsync($"Sorry, but I can only delete a maximum of {maximunDeletePerRequest} messages per request", ephemeral: true);
+            return;
+        }
+
+        await RespondAsync("Starting deletion...");
+
+        var messages = await Context.Channel.GetMessagesAsync(amount + 1).FlattenAsync();
+
+        if (Context.Channel is IMessageChannel messageChannel)
+        {
+            var batches = messages.Chunk(4);
+
+            foreach (var batch in batches)
+            {
+                foreach (var message in batch)
+                {
+                    _ = messageChannel.DeleteMessageAsync(message);
+                    await Task.Delay(1000);
+                }
+            }
+        }
+
+        await FollowupAsync($"Deleted {amount} messages.", ephemeral: true);
     }
 }

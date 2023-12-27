@@ -25,8 +25,13 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
     {
         if (channel != null && user != null)
         {
-            var socketUser = user as SocketUser;
-            if (socketUser != null)
+            if (user.IsBot)
+            {
+                await RespondAsync("Psst this is a bot, we don't talk to each other.", ephemeral: true);
+                return;
+            }
+
+            if (user is SocketUser socketUser)
             {
                 var dmChannel = await socketUser.CreateDMChannelAsync();
                 await dmChannel.SendMessageAsync($"Hey {user.Username}, {Context.User.Username} requires you on {channel.Name} and says: {message}");
@@ -34,7 +39,7 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
             }
             else
             {
-                await RespondAsync("Cannot convert IUser to SocketUser.", ephemeral: true);
+                await RespondAsync("Cannot process user", ephemeral: true);
             }
         }
         else
@@ -43,11 +48,51 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
         }
     }
 
+    [SlashCommand("user-info", "Shows user info in an embed.")]
+    public async Task UserInfo(IUser? user = null)
+    {
+        const int imageSize = 2048;
+        user ??= Context.User;
+
+        string statusEmoji;
+        switch (user.Status)
+        {
+            case UserStatus.Online:
+                statusEmoji = ":green_circle:";
+                break;
+            case UserStatus.Offline:
+                statusEmoji = ":black_circle:";
+                break;
+            case UserStatus.Idle:
+                statusEmoji = ":yellow_circle:";
+                break;
+            case UserStatus.DoNotDisturb:
+                statusEmoji = ":red_circle:";
+                break;
+            default:
+                statusEmoji = ":grey_question:";
+                break;
+        }
+
+        var embed = new EmbedBuilder()
+           .WithTitle(user.Username)
+           .AddField("Status", statusEmoji, true)
+           .AddField("CreatedAt", user.CreatedAt, false)
+           .WithImageUrl(user.GetAvatarUrl(size: imageSize))
+           .WithColor(new Color(255, 136, 0))
+           .WithFooter(footer => footer.Text = "Made by Vasitos Corp")
+           .WithCurrentTimestamp();
+
+        await RespondAsync(embed: embed.Build());
+    }
+
+
+
 
     [SlashCommand("misc-avatar", "Get user custom avatar")]
     [RequireContext(ContextType.Guild)]
     [RequireBotPermission(GuildPermission.AttachFiles)]
-    public async Task MiscCanvasAvatar(MiscCanvasType modificationType, SocketGuildUser user = null)
+    public async Task MiscCanvasAvatar(MiscCanvasType modificationType, SocketGuildUser? user = null)
     {
         user ??= (SocketGuildUser)Context.User;
         var avatarUrl = user.GetAvatarUrl();
@@ -66,7 +111,7 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
     [SlashCommand("overlay-avatar", "Get user custom avatar")]
     [RequireContext(ContextType.Guild)]
     [RequireBotPermission(GuildPermission.AttachFiles)]
-    public async Task OverlayCanvasAvatar(OverlayCanvasType modificationType, SocketGuildUser user = null)
+    public async Task OverlayCanvasAvatar(OverlayCanvasType modificationType, SocketGuildUser? user = null)
     {
         user ??= (SocketGuildUser)Context.User;
         var avatarUrl = user.GetAvatarUrl();

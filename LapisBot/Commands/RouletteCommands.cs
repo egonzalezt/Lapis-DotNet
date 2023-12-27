@@ -13,6 +13,7 @@ public class RouletteCommands : InteractionModuleBase<SocketInteractionContext>
         var embed = new EmbedBuilder()
             .WithImageUrl("https://64.media.tumblr.com/42ded69e00d9bbbec44cc6b4e7f25a3f/tumblr_mw5v90a3t71rmvkpdo1_500.gif")
             .WithDescription("Spinning...")
+            .WithFooter(footer => footer.Text = "Made by Vasitos Corp")
             .Build();
         await RespondAsync("Ok let's begin with the roulette");
 
@@ -26,6 +27,7 @@ public class RouletteCommands : InteractionModuleBase<SocketInteractionContext>
         var newEmbed = new EmbedBuilder()
             .WithImageUrl("https://64.media.tumblr.com/3f67776a237025ceb796b16453901ba3/tumblr_plwp1hWk6S1v1hotuo1_540.gif")
             .WithDescription($"The chosen element is `{chosenElement}`")
+            .WithFooter(footer => footer.Text = "Made by Vasitos Corp")
             .Build();
 
         await message.ModifyAsync(msg => msg.Embeds = new[] { newEmbed });

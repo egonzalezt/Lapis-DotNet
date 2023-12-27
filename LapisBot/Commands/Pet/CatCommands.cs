@@ -29,7 +29,7 @@ public class CatCommands : InteractionModuleBase<SocketInteractionContext>
 
             if (data is null)
             {
-                await RespondAsync("Sorry I can't find cat images 😞");
+                await RespondAsync("Sorry, I can't find cat images 😞");
                 return;
             }
 
@@ -37,6 +37,7 @@ public class CatCommands : InteractionModuleBase<SocketInteractionContext>
 
             var embed = new EmbedBuilder()
               .WithImageUrl(imageUrl)
+              .WithFooter(footer => footer.Text = "Made by Vasitos Corp")
               .Build();
 
             await RespondAsync(embed: embed);

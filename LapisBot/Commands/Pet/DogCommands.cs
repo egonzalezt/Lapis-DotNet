@@ -36,6 +36,7 @@ public class DogCommands : InteractionModuleBase<SocketInteractionContext>
             string imageUrl = data.message.ToString();
 
             var embed = new EmbedBuilder()
+              .WithFooter(footer => footer.Text = "Made by Vasitos Corp")
               .WithImageUrl(imageUrl)
               .Build();
 
