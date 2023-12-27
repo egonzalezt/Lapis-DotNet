@@ -1,16 +1,15 @@
 ﻿namespace LapisBot.ServiceConfiguration;
 
+using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
-using LapisBot.Handlers.Interaction;
-using LapisBot.Setup;
+using Handlers.Interaction;
+using Infrastructure.ServiceCollection;
+using Setup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using LapisBot.Infrastructure.ServiceCollection;
-using Discord;
-using Serilog.Sinks.SystemConsole.Themes;
 using SeriLogThemesLibrary;
 
 public static class ServiceCollection

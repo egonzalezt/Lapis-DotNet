@@ -5,7 +5,6 @@ using Discord.Interactions;
 using Discord.WebSocket;
 using Domain.Canvas;
 using Domain.Canvas.Repositories;
-using System.Runtime.InteropServices;
 
 public class UserInformationCommands : InteractionModuleBase<SocketInteractionContext>
 {

@@ -1,7 +1,8 @@
-﻿using Discord;
+﻿namespace LapisBot.Commands;
+
+using Discord;
 using Discord.Interactions;
 
-namespace LapisBot.Commands;
 public class RouletteCommands : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("roulette", "Like a roulette, The input should be a string of values separated by commas, like a,b,c,d")]

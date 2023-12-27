@@ -29,7 +29,7 @@ public class AnimeRepository : IAnimeRepository
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var randomAnime = JsonConvert.DeserializeObject<RandomAnimeDto>(jsonResponse);
 
-        if(randomAnime is null)
+        if (randomAnime is null)
         {
             return null;
         }

@@ -1,7 +1,7 @@
 ﻿namespace LapisBot.Commands;
 
+using Configuration;
 using Discord.Interactions;
-using LapisBot.Configuration;
 using Microsoft.Extensions.Options;
 public class PredictionCommand : InteractionModuleBase<SocketInteractionContext>
 {

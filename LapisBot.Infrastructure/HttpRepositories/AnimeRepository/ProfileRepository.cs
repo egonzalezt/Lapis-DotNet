@@ -29,7 +29,7 @@ public class ProfileRepository : IProfileRepository
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var userData = JsonConvert.DeserializeObject<UserWrapperDto>(jsonResponse);
 
-        if(userData is null)
+        if (userData is null)
         {
             return null;
         }

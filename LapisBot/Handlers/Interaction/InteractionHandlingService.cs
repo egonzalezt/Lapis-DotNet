@@ -1,13 +1,13 @@
 ﻿namespace LapisBot.Handlers.Interaction;
 
+using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
-using Discord;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
-using LapisBot.Utils;
+using Utils;
 
 public class InteractionHandlingService : IHostedService
 {

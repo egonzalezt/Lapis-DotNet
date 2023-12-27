@@ -1,8 +1,9 @@
-﻿using Discord;
-using Discord.Interactions;
-using LapisBot.Infrastructure.HttpRepositories.AnimeRepository;
+﻿namespace LapisBot.Commands.Anime;
 
-namespace LapisBot.Commands.Anime;
+using Discord;
+using Discord.Interactions;
+using Infrastructure.HttpRepositories.AnimeRepository;
+
 public class AnimeCommands : InteractionModuleBase<SocketInteractionContext>
 {
     private readonly IAnimeRepository _animeRepository;

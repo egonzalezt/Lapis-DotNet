@@ -15,7 +15,7 @@ public class UserCommand : InteractionModuleBase<SocketInteractionContext>
     [SlashCommand("myanimelist-user", "Get my anime list user info")]
     public async Task MyAnimeListUser(string userName)
     {
-        if(string.IsNullOrEmpty(userName))
+        if (string.IsNullOrEmpty(userName))
         {
             await RespondAsync("Please send the username", ephemeral: true);
             return;

@@ -1,6 +1,5 @@
 ﻿namespace LapisBot.Commands;
 
-using Discord;
 using Discord.Interactions;
 
 public class MathCommands : InteractionModuleBase<SocketInteractionContext>

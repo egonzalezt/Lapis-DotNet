@@ -1,14 +1,13 @@
 ﻿namespace LapisBot.Setup;
 
-using Discord.WebSocket;
+using Configuration;
 using Discord;
+using Discord.WebSocket;
+using Domain.Canvas.Repositories;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using LapisBot.Utils;
-using LapisBot.Configuration;
 using Microsoft.Extensions.Options;
-using LapisBot.Domain.Canvas.Repositories;
-using Discord.Commands;
+using Utils;
 
 public class DiscordStartupService : IHostedService
 {
@@ -18,7 +17,7 @@ public class DiscordStartupService : IHostedService
     private readonly IWelcomeRepository _welcomeRepository;
 
     public DiscordStartupService(
-        DiscordSocketClient discord, 
+        DiscordSocketClient discord,
         ILogger<DiscordSocketClient> logger,
         IOptions<DiscordConfiguration> discordConfiguration,
         IWelcomeRepository welcomeRepository
@@ -56,7 +55,7 @@ public class DiscordStartupService : IHostedService
         var channel = guild.DefaultChannel;
         if (channel != null)
         {
-           await channel.SendMessageAsync($"Goodbye {user.Username}, we will miss you! NOT EPICO");
+            await channel.SendMessageAsync($"Goodbye {user.Username}, we will miss you! NOT EPICO");
         }
         return;
     }
