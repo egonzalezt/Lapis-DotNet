@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LapisBot": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  lapisbot:
+    image: ${DOCKER_REGISTRY-}lapisbot
+    build:
+      context: .
+      dockerfile: LapisBot/Dockerfile
