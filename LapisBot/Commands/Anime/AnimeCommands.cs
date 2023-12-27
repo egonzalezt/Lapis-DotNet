@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.Interactions;
 using LapisBot.Infrastructure.HttpRepositories.AnimeRepository;
-using Newtonsoft.Json;
 
 namespace LapisBot.Commands.Anime;
 public class AnimeCommands : InteractionModuleBase<SocketInteractionContext>
@@ -17,9 +16,16 @@ public class AnimeCommands : InteractionModuleBase<SocketInteractionContext>
     {
         var anime = await _animeRepository.GetRandomAnime();
 
-        if(anime is null)
+        if (anime is null)
         {
             await RespondAsync("Sorry we couldn't find any anime 😭", ephemeral: true);
+            return;
+        }
+
+        // Check if any genre contains the word "hentai"
+        if (anime.data.genres.Any(g => g.name.Contains("hentai", StringComparison.OrdinalIgnoreCase)))
+        {
+            await RespondAsync("Sorry the anime that I found is NSFW", ephemeral: true);
             return;
         }
 
@@ -35,5 +41,6 @@ public class AnimeCommands : InteractionModuleBase<SocketInteractionContext>
 
         await RespondAsync(embed: embed.Build());
     }
+
 
 }
