@@ -7,7 +7,7 @@ app = "lapisbot"
 primary_region = "bog"
 
 [build]
-  dockerfile = ".\\LapisBot\\Dockerfile"
+  dockerfile = ".\LapisBot\Dockerfile"
 
 [http_service]
   internal_port = 8080
