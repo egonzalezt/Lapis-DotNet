@@ -19,7 +19,7 @@ public class OverlayRepository : IOverlayRepository
 
     public async Task<(byte[]?, string?)> GetCanvasAsync(string mediaUrl, OverlayCanvasType type)
     {
-        var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
+        using var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
         var url = $"canvas/overlay/{type}?avatar={mediaUrl}";
 
         try
@@ -49,12 +49,12 @@ public class OverlayRepository : IOverlayRepository
         }
     }
 
-    private static bool IsSupportedImageFormat(string contentType, out string imageFormat)
+    private static bool IsSupportedImageFormat(string contentType, out string? imageFormat)
     {
         foreach (ImageFormat format in Enum.GetValues(typeof(ImageFormat)))
         {
             var formatString = format.ToString().ToLowerInvariant();
-            if (contentType?.ToLowerInvariant().Contains(formatString) == true)
+            if (contentType?.ToLowerInvariant().Contains(formatString, StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 imageFormat = formatString;
                 return true;

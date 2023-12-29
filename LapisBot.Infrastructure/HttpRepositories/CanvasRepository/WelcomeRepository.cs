@@ -16,7 +16,7 @@ public class WelcomeRepository : IWelcomeRepository
     }
     public async Task<(byte[]?, string?)> GetWelcomeCanvasAsync(string profileUrl, string userName, string token)
     {
-        var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
+        using var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
         var url = $"welcome/img/1/stars?type=join&username={userName}&avatar={profileUrl}&guildName=1&memberCount=1&textcolor=blue&key={token}";
         try
         {
@@ -45,12 +45,12 @@ public class WelcomeRepository : IWelcomeRepository
         }
     }
 
-    private static bool IsSupportedImageFormat(string contentType, out string imageFormat)
+    private static bool IsSupportedImageFormat(string contentType, out string? imageFormat)
     {
         foreach (ImageFormat format in Enum.GetValues(typeof(ImageFormat)))
         {
             var formatString = format.ToString().ToLowerInvariant();
-            if (contentType?.ToLowerInvariant().Contains(formatString) == true)
+            if (contentType?.ToLowerInvariant().Contains(formatString, StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 imageFormat = formatString;
                 return true;

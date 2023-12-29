@@ -17,7 +17,7 @@ public class ProfileRepository : IProfileRepository
 
     public async Task<UserDto?> GetUserDataAsync(string username)
     {
-        var client = _clientFactory.CreateClient(MyAnimeListTitle);
+        using var client = _clientFactory.CreateClient(MyAnimeListTitle);
         var response = await client.GetAsync($"/v4/users/{username}/full");
 
         if (!response.IsSuccessStatusCode)

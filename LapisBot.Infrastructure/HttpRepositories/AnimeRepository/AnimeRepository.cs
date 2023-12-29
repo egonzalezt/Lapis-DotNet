@@ -17,7 +17,7 @@ public class AnimeRepository : IAnimeRepository
 
     public async Task<RandomAnimeDto?> GetRandomAnime()
     {
-        var client = _clientFactory.CreateClient(MyAnimeListTitle);
+        using var client = _clientFactory.CreateClient(MyAnimeListTitle);
         var response = await client.GetAsync($"/v4/random/anime");
 
         if (!response.IsSuccessStatusCode)

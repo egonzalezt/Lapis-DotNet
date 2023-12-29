@@ -19,7 +19,7 @@ public class MiscRepository : IMiscRepository
 
     public async Task<(byte[]?, string?)> GetCanvasAsync(string mediaUrl, MiscCanvasType type)
     {
-        var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
+        using var httpClient = _clientFactory.CreateClient(nameof(MiscRepository));
         var url = $"canvas/misc/{type}?avatar={mediaUrl}";
 
         try
