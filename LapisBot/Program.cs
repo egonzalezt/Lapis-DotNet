@@ -6,6 +6,7 @@ var host = Host.CreateDefaultBuilder(args)
   .ConfigureAppConfiguration((hostingContext, config) =>
   {
       config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+      config.AddEnvironmentVariables();
   })
   .ConfigureServices((hostingContext, services) =>
   {

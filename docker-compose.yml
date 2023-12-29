@@ -6,3 +6,6 @@ services:
     build:
       context: .
       dockerfile: LapisBot/Dockerfile
+    environment:
+      DiscordConfiguration__Token : ""
+      DiscordConfiguration__SraToken : ""
