@@ -89,7 +89,7 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
 
 
 
-    [SlashCommand("misc-avatar", "Get user custom avatar")]
+    [SlashCommand("avatar-misc", "Get user custom avatar")]
     [RequireContext(ContextType.Guild)]
     [RequireBotPermission(GuildPermission.AttachFiles)]
     public async Task MiscCanvasAvatar(MiscCanvasType modificationType, SocketGuildUser? user = null)
@@ -108,7 +108,7 @@ public class UserInformationCommands : InteractionModuleBase<SocketInteractionCo
         await RespondWithFileAsync(img.Stream, $"LapisCanvas{Guid.NewGuid()}.{result.Item2}");
     }
 
-    [SlashCommand("overlay-avatar", "Get user custom avatar")]
+    [SlashCommand("avatar-overlay", "Get user custom avatar")]
     [RequireContext(ContextType.Guild)]
     [RequireBotPermission(GuildPermission.AttachFiles)]
     public async Task OverlayCanvasAvatar(OverlayCanvasType modificationType, SocketGuildUser? user = null)

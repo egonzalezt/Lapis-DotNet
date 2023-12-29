@@ -8,7 +8,7 @@ using System.Linq;
 [DefaultMemberPermissions(GuildPermission.ManageChannels)]
 public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
 {
-    [SlashCommand("enable-channel", "Enable a specific channel.")]
+    [SlashCommand("mod-enable-channel", "Enable a specific channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task EnableChannel(SocketGuildChannel channel, IRole? role = null)
     {
@@ -25,7 +25,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("disable-channel", "Disable a specific channel.")]
+    [SlashCommand("mod-disable-channel", "Disable a specific channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task DisableChannel(SocketGuildChannel channel, IRole? role = null)
     {
@@ -42,7 +42,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("create-channel", "Creates a new text channel.")]
+    [SlashCommand("mod-create-channel", "Creates a new text channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task CreateChannel(string name)
     {
@@ -57,7 +57,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("assign-role-to-channel", "Assigns a role to a channel.")]
+    [SlashCommand("mod-assign-role-to-channel", "Assigns a role to a channel.")]
     [RequireBotPermission(GuildPermission.ManageRoles | GuildPermission.ManageChannels)]
     public async Task AssignRoleToChannel(SocketGuildChannel channel, IRole role)
     {
@@ -73,7 +73,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("revoke-role-from-channel", "Revokes a role's access to a channel.")]
+    [SlashCommand("mod-revoke-role-from-channel", "Revokes a role's access to a channel.")]
     [RequireBotPermission(GuildPermission.ManageRoles | GuildPermission.ManageChannels)]
     public async Task RevokeRoleFromChannel(SocketGuildChannel channel, IRole role)
     {
@@ -89,7 +89,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("add-user-to-channel", "Adds a user to a channel.")]
+    [SlashCommand("mod-add-user-to-channel", "Adds a user to a channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task AddUserToChannel(SocketGuildChannel channel, IUser user)
     {
@@ -105,7 +105,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("remove-user-from-channel", "Removes a user from a channel.")]
+    [SlashCommand("mod-revoke-user-from-channel", "Removes a user from a channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task RemoveUserFromChannel(SocketGuildChannel channel, IUser user)
     {
@@ -121,7 +121,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("set-slowmode", "Set the slow mode for a specific channel.")]
+    [SlashCommand("mod-set-slowmode", "Set the slow mode for a specific channel.")]
     [RequireBotPermission(GuildPermission.ManageChannels)]
     public async Task SetSlowMode(SocketGuildChannel channel, int delay = 5)
     {
@@ -136,7 +136,7 @@ public class ChannelCommands : InteractionModuleBase<SocketInteractionContext>
         }
     }
 
-    [SlashCommand("delete-messages", "Deletes the specified amount of messages.")]
+    [SlashCommand("mod-delete-messages", "Deletes the specified amount of messages.")]
     [RequireUserPermission(GuildPermission.Administrator)]
     [RequireBotPermission(ChannelPermission.ManageMessages)]
     public async Task DeleteMessages(int amount)
